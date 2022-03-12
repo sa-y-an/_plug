@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Layout from './components/CustomLayout'
+import Signin from './components/Signin';
 
 function App() {
+
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+
   return (
     <div className="App">
-      <Layout/>
+      {isLoggedIn
+        ? <Layout/>
+        : <Signin/>
+      }
+
     </div>
   );
 }
