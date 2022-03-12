@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import Layout from './components/CustomLayout'
 
 function App() {
   return (
     <div className="App">
-      <h1>
-        Hello Lets build a linkedIn clone !
-      </h1>
+      <Layout/>
     </div>
   );
 }
