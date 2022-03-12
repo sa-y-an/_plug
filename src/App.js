@@ -3,23 +3,37 @@ import './App.css';
 import Layout from './components/CustomLayout'
 import Signin from './components/Signin';
 import {firebase} from './Firebase/firebase'
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
 
   const [isLoggedIn, setisLoggedIn] = useState(true);
-  firebase.auth().onAuthStateChanged( (user) => {
-    if(user){
-      return setisLoggedIn(true);
-    }
+  const {user} = useAuthContext();
 
-    setisLoggedIn(false);
-  })
+  // firebase.auth().onAuthStateChanged( (user) => {
+  //   if(user){
+  //     return setisLoggedIn(true);
+  //   }
+
+  //   setisLoggedIn(false);
+  // })
+  console.log(user);
 
   return (
+
+    
+
     <div className="App">
-      {isLoggedIn
-        ? <Layout/>
-        : <Signin/>
+      {!user && 
+        <>
+          <Signin/>
+        </>
+      }
+
+      {user && 
+        <>
+          <Layout/>
+        </>
       }
 
     </div>
