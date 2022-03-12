@@ -1,5 +1,9 @@
 import React from 'react'
 import { firebase } from '../Firebase/firebase'
+import { Button, Space, Layout, Menu } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
+const { Header, Content } = Layout;
+
 
 function Signin() {
     
@@ -15,11 +19,32 @@ function Signin() {
     }
   
     return (
-
-    
-
     <div>
-        <button onClick={SignInWithFireBase}> SignIn with Google </button>
+        <Layout className='layout'> 
+            <Header style={{ justifyContent: "flex-end" }}>
+                <Menu
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={["2"]}
+                style={{ justifyContent: "center" }}
+                >
+                Welcome to Plug
+                </Menu>
+            </Header>
+            <Content type="flex" style={{height:"90vh", alignItems:"center", justifyContent:"center"}} align="middle">
+                <p>
+                    Please sign in with google to proceed !
+                </p>
+            <Button
+                type="primary"
+                icon={<PoweroffOutlined />}
+                onClick={SignInWithFireBase}
+            >
+                Sign In With Google
+            </Button>
+
+            </Content>
+        </Layout>        
     </div>
   )
 }

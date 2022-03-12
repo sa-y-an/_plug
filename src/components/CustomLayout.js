@@ -2,9 +2,16 @@ import "../css/customlayout.css";
 import React from "react";
 import { Layout, Menu, Pagination } from "antd";
 import Post from "./Post";
+import {firebase} from "../Firebase/firebase"
+
 const { Header, Content } = Layout;
 
 function CustomLayout() {
+
+  const signOut = () => {
+    firebase.auth().signOut();
+  }
+
   return (
     <div>
       <Layout className="layout">
@@ -18,7 +25,7 @@ function CustomLayout() {
           >
             <Menu.Item>Favourites</Menu.Item>
             <Menu.Item>Account</Menu.Item>
-            <Menu.Item>Logout</Menu.Item>
+            <Menu.Item onClick={signOut}>Logout</Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px", height: "100vh" }} align="middle">
