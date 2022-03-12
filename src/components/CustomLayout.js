@@ -11,11 +11,16 @@ function CustomLayout() {
         <Header>
         <div className="logo" />
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{justifyContent:'flex-end'}}>
-            {new Array(2).fill(null).map((_, index) => {
-            const key = index + 1;
-            return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-            })}
-            
+                       
+            <Menu.Item>
+              Favourites
+            </Menu.Item>
+            <Menu.Item>
+              Account
+            </Menu.Item>
+            <Menu.Item>
+              Logout
+            </Menu.Item>
 
         </Menu>
         
