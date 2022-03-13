@@ -7,27 +7,33 @@ import { useState, useEffect } from 'react'
 import { useFirestore } from '../hooks/useFirestore'
 import { useCollection } from '../hooks/useCollection'
 import { projectFirestore } from "../Firebase/firebase";
+import { waitFor } from "@testing-library/react";
 
 
 
 function Account( {user}) {
   
+  const [name, setName] = useState(null);
+ 
   const [form] = Form.useForm();
   const onReset = () => {
     form.resetFields();
   };
+
+
 
   
   const { addDocument, response } = useFirestore('statuses')
   const { documents, error } = useCollection(
     'statuses', ["uid", "==", user.uid]);
 
-  const [name, setName] = useState(null)
-  
-  if( documents ) {
-    console.log(documents[0].name)
-    
-  }
+  const [isFirstTime, setisFirstTime] = useState(true);
+
+  useEffect( () => {
+    if(documents && Object.keys(documents).length !== 0 && Object.getPrototypeOf(documents) !== Object.prototype){
+      setisFirstTime(false)
+    }
+  }, [documents])
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -65,17 +71,23 @@ function Account( {user}) {
     <div>
       <Layout align="middle">
         <h3>
-          Set Your Status 
+          Profile Page
         </h3>
-
+        
         <Content>
-
-          {documents && 
+          { !isFirstTime && 
+            <div>
             <p>
-              {documents[0].name}
-            </p> 
+              Current Status : {documents[0].name};
+            </p>
+            <p>
+              Likes : {documents[0].likeCount}
+            </p>
+            <p>
+              Bookmarked : {documents[0].likeCount}
+            </p>
+            </div>
           }
-
           <Form align="middle" form={form} name="control-hooks" >
             <Form.Item
               name = "Status "
@@ -90,12 +102,14 @@ function Account( {user}) {
                 ]}
               />
             </Form.Item>
-            { !documents && <Button type='primary' htmlType="submit" onClick={handleSubmit}> 
+            { isFirstTime && <Button type='primary' htmlType="submit" onClick={handleSubmit}> 
                 Submit
             </Button>}
-            { documents && <Button type="secondary" onClick={handleUpdate}>
+            { !isFirstTime && 
+              <Button type="secondary" onClick={handleUpdate}>
                 Update Status
-            </Button>}
+              </Button>
+            }
           </Form>
         </Content>
       </Layout>
