@@ -5,7 +5,8 @@ import { Form, Input, Button, Select } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useState, useEffect } from 'react'
 import { useFirestore } from '../hooks/useFirestore'
-
+import { useCollection } from '../hooks/useCollection'
+import { projectFirestore } from "../Firebase/firebase";
 
 
 
@@ -16,10 +17,18 @@ function Account( {user}) {
     form.resetFields();
   };
 
-  const [name, setName] = useState('')
+  
   const { addDocument, response } = useFirestore('statuses')
+  const { documents, error } = useCollection(
+    'statuses', ["uid", "==", user.uid]);
 
-
+  const [name, setName] = useState(null)
+  
+  if( documents ) {
+    console.log(documents[0].name)
+    
+  }
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     addDocument({
@@ -33,6 +42,15 @@ function Account( {user}) {
       picUrl : user.photoURL,
 
     })
+  }
+
+  const handleUpdate = (e) => {
+    console.log(documents[0].id)
+    const db = projectFirestore.collection("statuses")
+    db.doc(documents[0].id).update ( {
+      name : name
+    })
+
   }
 
   // reset the form fields
@@ -49,7 +67,15 @@ function Account( {user}) {
         <h3>
           Set Your Status 
         </h3>
+
         <Content>
+
+          {documents && 
+            <p>
+              {documents[0].name}
+            </p> 
+          }
+
           <Form align="middle" form={form} name="control-hooks" >
             <Form.Item
               name = "Status "
@@ -64,9 +90,12 @@ function Account( {user}) {
                 ]}
               />
             </Form.Item>
-            <Button type='primary' htmlType="submit" onClick={handleSubmit}> 
+            { !documents && <Button type='primary' htmlType="submit" onClick={handleSubmit}> 
                 Submit
-            </Button>
+            </Button>}
+            { documents && <Button type="secondary" onClick={handleUpdate}>
+                Update Status
+            </Button>}
           </Form>
         </Content>
       </Layout>
