@@ -1,28 +1,40 @@
-import { createContext,useReducer } from "react";
+import { createContext, useReducer, useEffect } from 'react'
+import { projectAuth } from "../Firebase/firebase"
 
-export const AuthContext = createContext();
+export const AuthContext = createContext()
 
-export const authReducer = ( state, action ) => {
-    switch ( action.type ) {
-        case 'LOGIN' :
-            return { ...state,  user : action.payload}
-        case 'LOGOUT' :
-            return { ...state, user : null }
-        default :
-            return state
-    }
+export const authReducer = (state, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return { ...state, user: action.payload }
+    case 'LOGOUT':
+      return { ...state, user: null }
+    case 'AUTH_IS_READY':
+      return { user: action.payload, authIsReady: true }
+    default:
+      return state
+  }
 }
 
-export const AuthContextProvider = ( {children}) => {
+export const AuthContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(authReducer, { 
+    user: null,
+    authIsReady: false
+  })
 
-    const [state, dispatch] = useReducer( authReducer, {
-        user : null
+  useEffect(() => {
+    const unsub = projectAuth.onAuthStateChanged(user => {
+      dispatch({ type: 'AUTH_IS_READY', payload: user })
+      unsub()
     })
-    console.log('AuthContextState: ', state)
+  }, [])
 
-    return (
-        <AuthContext.Provider value={{ ...state , dispatch}}>
-            {children}
-        </AuthContext.Provider>
-    )
+  console.log('AuthContext state:', state)
+  
+  return (
+    <AuthContext.Provider value={{ ...state, dispatch }}>
+      { children }
+    </AuthContext.Provider>
+  )
+
 }
