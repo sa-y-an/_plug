@@ -6,12 +6,14 @@ const { Content } = Layout;
 function Feed() {
   return (
     <div>
-      <Content>
-      <h2>Welcome to the feed !</h2>
-          <Post />
-          <br />
-          <Pagination defaultCurrent={1} total={50} />
-      </Content>
+      <Layout align="middle">
+        <Content>
+        <h2>Welcome to the feed !</h2>
+            <Post />
+            <br />
+            <Pagination defaultCurrent={1} total={50} />
+        </Content>
+      </Layout>
     </div>
   )
 }

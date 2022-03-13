@@ -14,7 +14,10 @@ function Navbar() {
   return (
     <div>
         <Header>
-          <div className="logo" />
+          <a href="/">
+            <div className="logo" />
+          </a>
+
           <Menu
             theme="dark"
             mode="horizontal"

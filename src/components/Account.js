@@ -1,9 +1,13 @@
 import React from 'react'
-
+import {Layout} from 'antd'
 function Account() {
   return (
     <div>
-        Account
+      <Layout align="middle">
+        <h5>
+          Account
+        </h5>
+      </Layout>
     </div>
   )
 }
