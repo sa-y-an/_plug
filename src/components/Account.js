@@ -88,6 +88,12 @@ function Account( {user}) {
             </p>
             </div>
           }
+
+          { isFirstTime && 
+            <p>
+              Please Set your status below .....
+            </p>
+          }
           <Form align="middle" form={form} name="control-hooks" >
             <Form.Item
               name = "Status "
