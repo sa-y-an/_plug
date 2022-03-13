@@ -14,7 +14,7 @@ function Profile() {
     <div>
         <Layout className='layout'>
           <Navbar/>
-          <Account uid={user.uid}/>
+          <Account user={user}/>
         </Layout>
     </div>
   )

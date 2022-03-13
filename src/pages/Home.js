@@ -7,7 +7,7 @@ import { useCollection } from '../hooks/useCollection'
 function Home() {
   const { user } = useAuthContext()
   const { documents, error } = useCollection(
-    'statuses', ["uid", "==", user.uid], ['createdAt', 'desc']);
+    'statuses', ["uid", "!=", user.uid]);
   return (
     <div>
       <Navbar/>

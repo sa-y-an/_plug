@@ -9,7 +9,7 @@ import { useFirestore } from '../hooks/useFirestore'
 
 
 
-function Account( {uid}) {
+function Account( {user}) {
   
   const [form] = Form.useForm();
   const onReset = () => {
@@ -23,10 +23,15 @@ function Account( {uid}) {
   const handleSubmit = (e) => {
     e.preventDefault()
     addDocument({
-      uid, 
+      uid : user.uid, 
       name, 
       likes : null,
       loves : null,
+      loveCount : 0,
+      likeCount : 0,
+      pname : user.displayName,
+      picUrl : user.photoURL,
+
     })
   }
 

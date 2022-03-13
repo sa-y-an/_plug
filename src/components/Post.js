@@ -1,8 +1,9 @@
 import React from 'react';
 import '../css/post.css';
-import { Skeleton, Card,Avatar, Row, Col } from 'antd';
+import { Skeleton, Card,Avatar, Row, Col,Typography } from 'antd';
 import { UserOutlined, HeartOutlined, DislikeOutlined, LikeOutlined} from '@ant-design/icons';
 const { Meta } = Card;
+const { Text} = Typography;
 
 
 function Post({statuses}) {
@@ -12,7 +13,9 @@ function Post({statuses}) {
     <div className='post'>
       <Row type="flex" align="middle" style={{justifyContent: 'center'}}>
         <Col >
-          <Card
+
+          { statuses.map( (post) => (
+            <Card key={post.id}
             style={{ width: 300, marginTop: 16, horizontalAlign: 'middle',
           }}
             actions={[
@@ -24,21 +27,28 @@ function Post({statuses}) {
           >
             <Skeleton loading={false} avatar active>
               <Meta
-                avatar={<Avatar icon={<UserOutlined />} />}
-                title="Card title"
-                description="This is the description"
+                avatar={<Avatar src={post.picUrl}/>}
+                title={post.pname}
+                description= {post.name} 
           />
+            {/* <p> 
+
+              <hr/>
+              
+              <li>
+                <Text type="secondary" > LikeCount : {post.likeCount} </Text>  
+              </li>
+              <li>
+              <Text type="secondary" > BookMarked : {post.loveCount} </Text>
+              </li>
+            </p> */}
             </Skeleton>
           </Card>
-        </Col>
-      </Row>
+          ))}
 
-      <br />
-      { statuses.map((status) => (
-        <li key={status.id}>
-          <p >{status.name}</p>
-        </li>
-      ))}
+          </Col>
+
+      </Row>
 
     </div>
   )
