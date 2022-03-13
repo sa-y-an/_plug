@@ -9,10 +9,6 @@ import { useAuthContext } from '../hooks/useAuthContext'
 function Profile() {
 
   const { user } = useAuthContext()
-  // const { documents, error } = useCollection(
-  //   'transactions', ["uid", "==", user.uid], ['createdAt', 'desc']
-  // )
-
 
   return (
     <div>

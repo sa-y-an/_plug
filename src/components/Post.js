@@ -5,7 +5,9 @@ import { UserOutlined, HeartOutlined, DislikeOutlined, LikeOutlined} from '@ant-
 const { Meta } = Card;
 
 
-function Post({name, desription, message, photoUrl}) {
+function Post({statuses}) {
+  console.log(statuses)
+
   return (
     <div className='post'>
       <Row type="flex" align="middle" style={{justifyContent: 'center'}}>
@@ -30,6 +32,13 @@ function Post({name, desription, message, photoUrl}) {
           </Card>
         </Col>
       </Row>
+
+      <br />
+      { statuses.map((status) => (
+        <li key={status.id}>
+          <p >{status.name}</p>
+        </li>
+      ))}
 
     </div>
   )
