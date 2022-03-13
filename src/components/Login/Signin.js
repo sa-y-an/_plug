@@ -1,8 +1,8 @@
 import React from 'react'
-import { firebase } from '../Firebase/firebase'
+import { firebase } from '../../Firebase/firebase'
 import { Button, Space, Layout, Menu } from 'antd';
 import { PoweroffOutlined } from '@ant-design/icons';
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const { Header, Content } = Layout;
 
@@ -24,10 +24,8 @@ function Signin() {
     return (
     <div>
 
-        <Content type="flex" style={{height:"90vh", alignItems:"center", justifyContent:"center"}} align="middle">
-            <p>
-                Please sign in with google to proceed !
-            </p>
+        <Content type="flex" style={{alignItems:"center", justifyContent:"center"}} align="middle">
+
         <Button
             type="primary"
             icon={<PoweroffOutlined />}

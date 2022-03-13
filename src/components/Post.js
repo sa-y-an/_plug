@@ -27,6 +27,7 @@ function Post({statuses, user}) {
                 description= {post.name} 
           />
             </Skeleton>
+            <br />
             <hr/>
             <div  className='additional'> 
               <div className="container" >
