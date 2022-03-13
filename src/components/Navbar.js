@@ -24,7 +24,9 @@ function Navbar() {
             { user && 
             <>
               <Menu.Item>Favourites</Menu.Item>
-              <Menu.Item>Account</Menu.Item>
+              <Menu.Item >
+                <a href="/profile"> Account</a>
+              </Menu.Item>
               <Menu.Item onClick={logout}>Logout</Menu.Item>
             </>
             } 
