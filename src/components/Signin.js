@@ -14,12 +14,7 @@ function Signin() {
         var google_provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(google_provider)
         .then( (res) => {
-            // console.log(re);
-
-            // dispatch login event 
             dispatch( { type: 'LOGIN' , payload : res.user })
-
-
         })
         .catch( (err) => {
             console.log(err);
@@ -28,31 +23,21 @@ function Signin() {
   
     return (
     <div>
-        <Layout className='layout'> 
-            <Header style={{ justifyContent: "flex-end" }}>
-                <Menu
-                theme="dark"
-                mode="horizontal"
-                defaultSelectedKeys={["2"]}
-                style={{ justifyContent: "center" }}
-                >
-                Welcome to Plug
-                </Menu>
-            </Header>
-            <Content type="flex" style={{height:"90vh", alignItems:"center", justifyContent:"center"}} align="middle">
-                <p>
-                    Please sign in with google to proceed !
-                </p>
-            <Button
-                type="primary"
-                icon={<PoweroffOutlined />}
-                onClick={SignInWithFireBase}
-            >
-                Sign In With Google
-            </Button>
 
-            </Content>
-        </Layout>        
+        <Content type="flex" style={{height:"90vh", alignItems:"center", justifyContent:"center"}} align="middle">
+            <p>
+                Please sign in with google to proceed !
+            </p>
+        <Button
+            type="primary"
+            icon={<PoweroffOutlined />}
+            onClick={SignInWithFireBase}
+        >
+            Sign In With Google
+        </Button>
+
+        </Content>
+     
     </div>
   )
 }

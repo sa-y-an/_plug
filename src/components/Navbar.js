@@ -1,19 +1,15 @@
 import React from 'react'
 import '../css/header.css'
-import { HomeOutlined } from '@ant-design/icons'
 import { Layout, Menu } from "antd";
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useLogout } from '../hooks/useLogout'
 
+const { Header} = Layout;
 
 
-const { Header, Content } = Layout;
-
-
-function Header2() {
+function Navbar() {
   const { logout } = useLogout()
   const { user } = useAuthContext()
-
 
   return (
     <div>
@@ -25,9 +21,13 @@ function Header2() {
             defaultSelectedKeys={["2"]}
             style={{ justifyContent: "flex-end" }}
           >
-            <Menu.Item>Favourites</Menu.Item>
-            <Menu.Item>Account</Menu.Item>
-            <Menu.Item onClick={logout}>Logout</Menu.Item>
+            { user && 
+            <>
+              <Menu.Item>Favourites</Menu.Item>
+              <Menu.Item>Account</Menu.Item>
+              <Menu.Item onClick={logout}>Logout</Menu.Item>
+            </>
+            } 
           </Menu>
         </Header>
 
@@ -35,4 +35,4 @@ function Header2() {
   )
 }
 
-export default Header2
+export default Navbar

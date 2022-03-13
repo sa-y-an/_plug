@@ -1,34 +1,26 @@
-import React, { useState } from 'react';
 import './App.css';
-import Layout from './components/CustomLayout'
-import Signin from './components/Signin';
-import {firebase} from './Firebase/firebase'
-import { useAuthContext } from './hooks/useAuthContext';
+import Home from "./pages/Home"
+import Profile from "./pages/Profile"
+import SignIn from "./pages/SignIn"
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Navigate } from "react-router-dom";
+import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
 
-  const [isLoggedIn, setisLoggedIn] = useState(true);
-  const { authIsReady, user } = useAuthContext()
+const { authIsReady, user } = useAuthContext()
 
   return (
-
-    
-
     <div className="App">
       { authIsReady && (
-        <div>
-        {!user && 
-          <>
-            <Signin/>
-          </>
-        }
+        
+        <BrowserRouter>
+          <Routes>
+            { user ? <Route path="/" element={<Home/>} exact/> :  <Route path="/" element={<SignIn/>} exact/> }
+            <Route path="/profile" element={<Profile/>} />
+          </Routes>
+        </BrowserRouter>
 
-        {user && 
-          <>
-            <Layout/>
-          </>
-        }
-        </div>
       )}
 
 
