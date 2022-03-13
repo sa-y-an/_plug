@@ -30,10 +30,12 @@ function Account( {user}) {
     addDocument({
       uid : user.uid, 
       name, 
-      likes : null,
-      loves : null,
+      likes : [],
+      loves : [],
       loveCount : 0,
       likeCount : 0,
+      dislikes : [],
+      dislikeCount : 0,
       pname : user.displayName,
       picUrl : user.photoURL,
 

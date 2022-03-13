@@ -1,13 +1,14 @@
 import React from 'react';
 import '../css/post.css';
-import { Skeleton, Card,Avatar, Row, Col,Typography } from 'antd';
+import { Skeleton, Card,Avatar, Row, Col,Typography, Button } from 'antd';
 import { UserOutlined, HeartOutlined, DislikeOutlined, LikeOutlined} from '@ant-design/icons';
+
+import Like from './btnComponents/Like';
+
 const { Meta } = Card;
-const { Text} = Typography;
 
 
-function Post({statuses}) {
-  console.log(statuses)
+function Post({statuses, user}) {
 
   return (
     <div className='post'>
@@ -18,12 +19,6 @@ function Post({statuses}) {
             <Card key={post.id}
             style={{ width: 300, marginTop: 16, horizontalAlign: 'middle',
           }}
-            actions={[
-              <LikeOutlined/> ,
-              <HeartOutlined />,
-              <DislikeOutlined />,
-              
-            ]}
           >
             <Skeleton loading={false} avatar active>
               <Meta
@@ -31,21 +26,36 @@ function Post({statuses}) {
                 title={post.pname}
                 description= {post.name} 
           />
-            {/* <p> 
-
-              <hr/>
-              
-              <li>
-                <Text type="secondary" > LikeCount : {post.likeCount} </Text>  
-              </li>
-              <li>
-              <Text type="secondary" > BookMarked : {post.loveCount} </Text>
-              </li>
-            </p> */}
             </Skeleton>
+            <hr/>
+            <div  className='additional'> 
+              <div className="container" >
+                <div className="likes">
+                  <div className="icon-square">
+                    <Like user={user} post = {post}/>
+                    {post.likeCount}
+                  </div>
+                </div>
+                <div className="love">
+                  <div className="icon-square">
+                  <HeartOutlined/>
+                  {post.loveCount}
+                  </div>
+                  
+                </div>
+                <div className="dislike">
+                  <div className="icon-square">
+                  <DislikeOutlined/>
+                  {post.dislikeCount}
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+
           </Card>
           ))}
-
+          
           </Col>
 
       </Row>

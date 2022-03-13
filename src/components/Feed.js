@@ -10,7 +10,7 @@ function Feed({statuses, user}) {
       <Layout align="middle">
         <Content>
         <h2>Welcome to the feed, {user.displayName} !</h2>
-            < Post statuses={statuses} />
+            < Post statuses={statuses} user={user} />
             <br />
             <Pagination defaultCurrent={1} total={50} />
         </Content>
