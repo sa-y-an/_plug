@@ -3,9 +3,41 @@ import React from 'react'
 import {Layout} from 'antd'
 import { Form, Input, Button, Select } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
+import { useState, useEffect } from 'react'
+import { useFirestore } from '../hooks/useFirestore'
 
 
-function Account() {
+
+
+function Account( {uid}) {
+  
+  const [form] = Form.useForm();
+  const onReset = () => {
+    form.resetFields();
+  };
+
+  const [name, setName] = useState('')
+  const { addDocument, response } = useFirestore('statuses')
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    addDocument({
+      uid, 
+      name, 
+      likes : null,
+      loves : null,
+    })
+  }
+
+  // reset the form fields
+  useEffect(() => {
+    if (response.success) {
+      onReset();
+    }
+  }, [response.success])
+
+
   return (
     <div>
       <Layout align="middle">
@@ -13,15 +45,23 @@ function Account() {
           Set Your Status 
         </h3>
         <Content>
-          <Form align="middle">
+          <Form align="middle" form={form} name="control-hooks" >
             <Form.Item
-              name = ""
+              name = "Status "
             >
-              <Input style={{ maxWidth : "60vw"}}/>
+              <Input style={{ maxWidth : "60vw"}}
+                onChange={(e) => setName(e.target.value)} 
+                value={name} 
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              />
             </Form.Item>
-            <Button type='primary'> 
+            <Button type='primary' htmlType="submit" onClick={handleSubmit}> 
                 Submit
-              </Button>
+            </Button>
           </Form>
         </Content>
       </Layout>
