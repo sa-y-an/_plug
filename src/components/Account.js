@@ -1,27 +1,17 @@
 import "../css/account.css"
 import React from 'react'
 import {Layout} from 'antd'
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button} from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useState, useEffect } from 'react'
 import { useFirestore } from '../hooks/useFirestore'
 import { useCollection } from '../hooks/useCollection'
 import { projectFirestore } from "../Firebase/firebase";
-import { waitFor } from "@testing-library/react";
-
 
 
 function Account( {user}) {
   
   const [name, setName] = useState(null);
- 
-  const [form] = Form.useForm();
-  const onReset = () => {
-    form.resetFields();
-  };
-
-
-
   
   const { addDocument, response } = useFirestore('statuses')
   const { documents, error } = useCollection(
@@ -60,9 +50,11 @@ function Account( {user}) {
   }
 
   // reset the form fields
+  const [form] = Form.useForm();
+
   useEffect(() => {
     if (response.success) {
-      onReset();
+      form.resetFields();
     }
   }, [response.success])
 
