@@ -8,33 +8,29 @@ import { useAuthContext } from './hooks/useAuthContext';
 function App() {
 
   const [isLoggedIn, setisLoggedIn] = useState(true);
-  const {user} = useAuthContext();
-
-  // firebase.auth().onAuthStateChanged( (user) => {
-  //   if(user){
-  //     return setisLoggedIn(true);
-  //   }
-
-  //   setisLoggedIn(false);
-  // })
-  console.log(user);
+  const { authIsReady, user } = useAuthContext()
 
   return (
 
     
 
     <div className="App">
-      {!user && 
-        <>
-          <Signin/>
-        </>
-      }
+      { authIsReady && (
+        <div>
+        {!user && 
+          <>
+            <Signin/>
+          </>
+        }
 
-      {user && 
-        <>
-          <Layout/>
-        </>
-      }
+        {user && 
+          <>
+            <Layout/>
+          </>
+        }
+        </div>
+      )}
+
 
     </div>
   );
