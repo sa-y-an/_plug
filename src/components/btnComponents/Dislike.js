@@ -1,9 +1,18 @@
 import React from 'react'
-import { DislikeOutlined,DislikeFilled} from '@ant-design/icons';
+import { DislikeOutlined,DislikeFilled, DislikeTwoTone} from '@ant-design/icons';
 import { projectFirestore } from "../../Firebase/firebase";
 import { arrayUnion, arrayRemove } from "firebase/firestore";
 
 function Dislike({user, post}) {
+
+  if( user.uid === post.uid) {
+    return (
+      <div>
+        <DislikeTwoTone />
+      </div>
+    )
+  }
+
 
   const dislikePhoto = (e,post) => {
     const db = projectFirestore.collection("statuses")

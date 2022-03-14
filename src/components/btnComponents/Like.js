@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
-import { UserOutlined, HeartOutlined, DislikeOutlined, LikeOutlined, LikeFilled} from '@ant-design/icons';
+import { LikeOutlined, LikeFilled, LikeTwoTone} from '@ant-design/icons';
 import { projectFirestore } from "../../Firebase/firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
 function Like({user, post}) {
+
+  if( user.uid === post.uid) {
+    return (
+      <div>
+        <LikeTwoTone />
+      </div>
+    )
+  }
+
 
   const likePhoto = (e,post) => {
     const db = projectFirestore.collection("statuses")
