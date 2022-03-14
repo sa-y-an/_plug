@@ -1,9 +1,8 @@
 import React from 'react'
-import '../css/header.css'
 import { Layout, Menu } from "antd";
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useLogout } from '../hooks/useLogout'
-
+// import '../css/header.css'
 const { Header} = Layout;
 
 
@@ -13,28 +12,29 @@ function Navbar() {
 
   return (
     <div>
-        <Header>
-          <a href="/">
-            <div className="logo" />
-          </a>
-
+        <Header style={{ backgroundColor : "rgba(222, 222, 222, 1)"}}>
+          
           <Menu
-            theme="dark"
+            theme="light"
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            style={{ justifyContent: "flex-end" }}
+            style={{ justifyContent: "flex-end" ,backgroundColor : "rgba(222, 222, 222, 1)" }}
           >
+            <Menu.Item key={0} >
+              <a href="/">
+                Home
+              </a>
+            </Menu.Item>
             { user && 
             <>
-              <Menu.Item >
+              <Menu.Item key={1}>
                 <a href="/favourites">
                 Favourites
                 </a>
               </Menu.Item>
-              <Menu.Item >
+              <Menu.Item key={2}>
                 <a href="/profile"> Account</a>
-              </Menu.Item>
-              <Menu.Item onClick={logout}>Logout</Menu.Item>
+              </Menu.Item > 
+              <Menu.Item onClick={logout} key={3}>Logout</Menu.Item>
             </>
             } 
           </Menu>

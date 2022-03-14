@@ -17,12 +17,13 @@ function Post({statuses, user}) {
 
           { statuses.map( (post) => (
             <Card key={post.id}
-            style={{ width: 300, marginTop: 16, horizontalAlign: 'middle',
+            style={{ width: 400, marginTop: 16, horizontalAlign: 'middle', background : "rgba(0,0,0,0.03)",
+            borderRadius : "1.5em", boxShadow : "1px 1px"
           }}
           >
             <Skeleton loading={false} avatar active>
               <Meta
-                avatar={<Avatar src={post.picUrl}/>}
+                avatar={<Avatar src={post.picUrl} style={{boxShadow:"0 1.5px black", marginLeft : 25 , marginTop : 25 }}/>}
                 title={post.pname}
                 description= {post.name} 
           />
