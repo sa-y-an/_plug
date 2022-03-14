@@ -1,9 +1,9 @@
 import React from 'react';
 import '../css/post.css';
 import { Skeleton, Card,Avatar, Row, Col,Typography, Button } from 'antd';
-import { UserOutlined, HeartOutlined, DislikeOutlined, LikeOutlined} from '@ant-design/icons';
 import Like from './btnComponents/Like';
 import Dislike from './btnComponents/Dislike';
+import Favourite from './btnComponents/Favourite';
 
 const { Meta } = Card;
 
@@ -40,10 +40,8 @@ function Post({statuses, user}) {
 
                 <div className="love">
                   <div className="icon-square">
-                    <HeartOutlined/>
-                    
-                    Follow 
-                    
+                    <Favourite user={user} post={post}/>  
+                    {post.loveCount}           
                   </div>
                 </div>
 
