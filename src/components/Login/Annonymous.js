@@ -4,7 +4,6 @@ import { Button } from 'antd'
 import { UnlockOutlined } from '@ant-design/icons'
 import { getAuth, signInAnonymously , updateProfile} from "firebase/auth";
 import { useAuthContext } from '../../hooks/useAuthContext';
-import FetchRandomData from './FetchRandomData';
 
 function Annonymous() {
 
@@ -51,7 +50,6 @@ function Annonymous() {
     return (
     <div>
         <Content>
-            <FetchRandomData/>
             <Button
             icon={<UnlockOutlined />}
             type="primary"
