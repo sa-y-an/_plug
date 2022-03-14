@@ -4,6 +4,7 @@ import SignIn from "./pages/SignIn"
 import Loved from "./pages/Loved"
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
+import {Rings} from "react-loader-spinner";
 
 function App() {
 
@@ -11,6 +12,13 @@ const { authIsReady, user } = useAuthContext()
 
   return (
     <div className="App">
+    {!authIsReady && 
+    <div style={{ backgroundColor : "black",  height:"100vh" ,width:"100vw" , display : "flex", alignItem : "center", justifyContent: "center"}}>
+      <Rings color="#00BFFF" height={"100vh"} width={"100vw"} />
+    </div>
+    
+    }
+
       { authIsReady && (
         
         <BrowserRouter>
