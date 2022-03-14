@@ -80,7 +80,7 @@ function Account( {user}) {
               Likes : {documents[0].likeCount}
             </p>
             <p>
-              Bookmarked : {documents[0].likeCount}
+              Favourites : {documents[0].loveCount}
             </p>
             </div>
           }

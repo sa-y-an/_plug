@@ -26,7 +26,11 @@ function Navbar() {
           >
             { user && 
             <>
-              <Menu.Item>Favourites</Menu.Item>
+              <Menu.Item >
+                <a href="/favourites">
+                Favourites
+                </a>
+              </Menu.Item>
               <Menu.Item >
                 <a href="/profile"> Account</a>
               </Menu.Item>

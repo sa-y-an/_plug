@@ -16,7 +16,10 @@ export const useCollection = (collection, _query, _orderBy) => {
     if (query) {
       ref = ref.where(...query)
     }
-    ref = ref.orderBy("likeCount", "desc")
+
+    if (orderBy) {
+      ref = ref.orderBy(...orderBy)
+    }
     
 
     const unsubscribe = ref.onSnapshot(snapshot => {

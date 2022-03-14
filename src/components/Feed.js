@@ -12,7 +12,6 @@ function Feed({statuses, user}) {
         <h2>Welcome to the feed, {user.displayName} !</h2>
             < Post statuses={statuses} user={user} />
             <br />
-            <Pagination defaultCurrent={1} total={50} />
         </Content>
       </Layout>
     </div>
