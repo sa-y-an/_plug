@@ -22,7 +22,9 @@ function Account( {user}) {
   useEffect( () => {
     if(documents && Object.keys(documents).length !== 0 && Object.getPrototypeOf(documents) !== Object.prototype){
       setisFirstTime(false)
+      console.log("hello")
     }
+    console.log("isFirstTime ran")
   }, [documents])
   
   const handleSubmit = (e) => {
